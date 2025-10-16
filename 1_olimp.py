@@ -9,7 +9,7 @@ from PyQt6.QtGui import QColor
 class OlympiadApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui\olimp.ui", self)
+        uic.loadUi("ui/olimp.ui", self)
         self.setWindowTitle("Результаты")
         self.resize(800, 600)
         self.data = []
