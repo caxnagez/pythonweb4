@@ -10,12 +10,24 @@ from pathlib import Path
 class UFOGameWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ui/ufo.ui", self)
+        if getattr(sys, 'frozen', False):
+            ui_path = os.path.join(sys._MEIPASS, 'ui', 'ufo.ui')
+        else:
+            ui_path = os.path.join(os.path.dirname(__file__), 'ui', 'ufo.ui')
+        if not os.path.exists(ui_path):
+            QMessageBox.critical(self, f"Файл не найден\n{ui_path}")
+            sys.exit(1)
+        uic.loadUi(ui_path, self)
         self.background_label = self.findChild(QLabel, "backgroundLabel")
         if not self.background_label:
-            QMessageBox.critical(self, "Ошибка")
+            QMessageBox.critical(self, "Ошибка", "QLabel 'backgroundLabel' не найден в UI.")
             sys.exit(1)
-        ufo_path = os.path.join(os.path.dirname(__file__), 'images', 'ufo.png')
+        ufo_path = os.path.join(os.path.dirname(__file__), 'resources', 'ufo.png')
+        if getattr(sys, 'frozen', False):
+            ufo_path = os.path.join(sys._MEIPASS, 'resources', 'ufo.png')
+        else:
+            ufo_path = os.path.join(os.path.dirname(__file__), 'resources', 'ufo.png')
+
         if not os.path.exists(ufo_path):
             print(f"Изображение НЛО не найдено по пути: {ufo_path}, будет использован 🛸")
             self.ufo_label = QLabel("🛸", self.background_label)
@@ -33,7 +45,6 @@ class UFOGameWindow(QMainWindow):
                 scaled_pixmap = pixmap.scaled(150, 150, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
                 self.ufo_label.setPixmap(scaled_pixmap)
                 self.ufo_label.resize(scaled_pixmap.size())
-                
         window_width = self.background_label.width()
         window_height = self.background_label.height()
         ufo_width = self.ufo_label.width()
@@ -44,7 +55,9 @@ class UFOGameWindow(QMainWindow):
         self.step_size = 20
         self.setFocusPolicy(Qt.FocusPolicy.StrongFocus)
         self.setFocus()
+
         print("Используйте стрелки для управления UFO")
+
 
     def keyPressEvent(self, event: QKeyEvent):
         key = event.key()
@@ -69,9 +82,9 @@ class UFOGameWindow(QMainWindow):
             if self.x_pos < -ufo_width:
                 self.x_pos = bg_width  
             elif self.x_pos > bg_width:
-                self.x_pos = -ufo_width 
+                self.x_pos = -ufo_width  
             if self.y_pos < -ufo_height:
-                self.y_pos = bg_height
+                self.y_pos = bg_height 
             elif self.y_pos > bg_height:
                 self.y_pos = -ufo_height
             self.ufo_label.move(self.x_pos, self.y_pos)
