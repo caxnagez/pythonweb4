@@ -14,9 +14,6 @@ class EscapingButtonWindow(QMainWindow):
         super().__init__()
         uic.loadUi("ui/button.ui", self)
         self.escape_button = self.findChild(QPushButton, "escapeButton")
-        if not self.escape_button:
-            QMessageBox.critical(self, "Ошибка", "QPushButton 'escapeButton' не найден.")
-            sys.exit(1)
         self.original_enter_event = self.escape_button.enterEvent
         self.escape_button.enterEvent = self.on_button_hover
 
