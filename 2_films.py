@@ -247,7 +247,7 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    db_file = "tables/films_db.sqlite"
+    db_file = "resources/films_db.sqlite"
     if not os.path.exists(db_file):
         QMessageBox.critical(None, "Файл базы данных '{db_file}' не найден в текущей папке.")
         sys.exit(1)

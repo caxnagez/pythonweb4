@@ -15,7 +15,7 @@ class OlympiadApp(QMainWindow):
         self.data = []
         self.schools = set()
         self.classes = set()
-        self.load_data("tables\olimp.csv")
+        self.load_data("resources/olimp.csv")
         self.school_combo.addItem("Все")
         self.class_combo.addItem("Все")
         self.school_combo.addItems(sorted(self.schools))
