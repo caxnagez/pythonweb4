@@ -1,0 +1,15 @@
+dist/5_UFO.exe
+build/5_UFO/xref-5_UFO.html
+build/5_UFO/localpycs/pyimod01_archive.pyc
+build/5_UFO/localpycs/pyimod02_importers.pyc
+build/5_UFO/localpycs/pyimod03_ctypes.pyc
+build/5_UFO/localpycs/pyimod04_pywin32.pyc
+build/5_UFO/localpycs/struct.pyc
+build/5_UFO/warn-5_UFO.txt
+build/5_UFO/PYZ-00.toc
+build/5_UFO/PYZ-00.pyz
+build/5_UFO/PKG-00.toc
+build/5_UFO/EXE-00.toc
+build/5_UFO/base_library.zip
+build/5_UFO/Analysis-00.toc
+build/5_UFO/5_UFO.pkg
